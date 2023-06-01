@@ -66,7 +66,24 @@ class Graph {
    }
 
   /** traverse graph with BDS and returns array of Node values */
-  breadthFirstSearch(start) { }
+  breadthFirstSearch(start) {
+    const nodesToVisitQueue = [start];
+    const seen = [];
+
+    while (nodesToVisitQueue.length) {
+      let node = nodesToVisitQueue.shift();
+
+      if(!seen.includes(node)){
+        for (let adjNode of node.adjacent){
+          nodesToVisitQueue.push(adjNode);
+        }
+
+        seen.push(node);
+      }
+    }
+
+    return seen.map((node) => node.value);
+   }
 
   /** find the distance of the shortest path from the start vertex to the end vertex */
   distanceOfShortestPath(start, end) { }
