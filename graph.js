@@ -107,6 +107,10 @@ class Graph {
             // increment pathlength by 1, return pathLength;
     
     
+    // 1st loop: Adjacents don't include, queue = [h], seen = [m], pathLength = 1,
+      // 2nd Loop, adjacents don't include, queue = [T, R], seen = [m, h], pathLength = 2, 
+        // 3rd loop, IT DOES, increment, return, 3
+    
     while (nodeToVisitQueue.length) {
       let node = nodeToVisitQueue.shift();
       console.log('The queue is =', nodeToVisitQueue)

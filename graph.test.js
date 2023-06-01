@@ -284,6 +284,7 @@ describe("distanceOfShortestPath", function () {
     //        I - T - H
     //                |
     //                M
+    //            
 
     let graph = new Graph();
 
