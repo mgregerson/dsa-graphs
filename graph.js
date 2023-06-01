@@ -47,7 +47,23 @@ class Graph {
   removeVertex(vertex) { }
 
   /** traverse graph with DFS and returns array of Node values */
-  depthFirstSearch(start) { }
+  depthFirstSearch(start) {
+    let stack = [start];
+    let seen = [];
+
+   while (stack.length) {
+     let node = stack.pop();
+     if (!seen.includes(node)) {
+       for (let adjacentNode of node.adjacent) {
+        stack.push(adjacentNode);
+       }
+       seen.push(node);
+     }
+   }
+    console.log('seen=', seen);
+    // console.log(seen.map(node => node.val), 'is this map working?')
+    return seen.map(node => node.value);
+   }
 
   /** traverse graph with BDS and returns array of Node values */
   breadthFirstSearch(start) { }
