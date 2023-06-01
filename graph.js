@@ -90,20 +90,56 @@ class Graph {
     const stepsTaken = [];
     let pathLength = 0;
 
+    // 2nd loop = queue = [T, R, M]
+      // seen = [H]
+    // 3rd loop
+      // queue = [R, M, I]
+      // seen = [H, T]
+    // 4th loop
+      // queue =
+    
+    
+    // if R adjacents don't include end, add to seen, add each adjacent
+    // to queue, increase path length by one.
+      // seen = [r], [I, T, H], pathLength = 1;
+        // seen = [R, I], [T, H], pathLength = 1;
+          // [R, I, T], [H], pathLength = 1;
+            // increment pathlength by 1, return pathLength;
+    
+    
     while (nodeToVisitQueue.length) {
       let node = nodeToVisitQueue.shift();
+      console.log('The queue is =', nodeToVisitQueue)
+      console.log('The node is =', node)
+      console.log('seen array = ', seen)
       if (!seen.includes(node)) {
         if (node === end) {
           stepsTaken.push(pathLength);
+          pathLength = 0;
         } else {
           for (let adjNode of node.adjacent) {
-            nodeToVisitQueue.push(adjNode);
+            if (!seen.includes(adjNode) && !nodeToVisitQueue.includes(adjNode)) {
+              nodeToVisitQueue.push(adjNode);
+            }
           }
-          pathLength += 1;
+          seen.push(node);
+          let seenStatus = [];
+          for (let adjNode of node.adjacent) {
+            if (seen.includes(adjNode)) {
+              seenStatus.push(true);
+            } else {
+              seenStatus.push(false);
+            }
+          }
+          console.log(seenStatus, node, 'SeenStatus and node')
+          if (!seenStatus.includes(false)){
+            pathLength += 1;
+          }
+          seenStatus = [];
         }
       }
     }
-    return Math.min(...stepsTaken);
+    console.log(stepsTaken, 'the number of stepsTaken')
   }
 }
 
