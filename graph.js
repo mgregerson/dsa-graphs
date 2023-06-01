@@ -34,7 +34,10 @@ class Graph {
   }
 
   /** remove edge between vertices v1,v2 */
-  removeEdge(v1, v2) { }
+  removeEdge(v1, v2) {
+    v1.adjacent.delete(v2);
+    v2.adjacent.delete(v1);
+  }
 
   /** remove vertex from graph:
    *
