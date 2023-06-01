@@ -16,10 +16,16 @@ class Graph {
   }
 
   /** add Node instance and add it to nodes property on graph. */
-  addVertex(vertex) { }
+  addVertex(vertex) {
+    this.nodes.add(vertex);
+   }
 
   /** add array of new Node instances and adds to them to nodes property. */
-  addVertices(vertexArray) { }
+  addVertices(vertexArray) {
+    for (let vertex of vertexArray) {
+      this.nodes.add(vertex);
+    }
+   }
 
   /** add edge between vertices v1,v2 */
   addEdge(v1, v2) { }
