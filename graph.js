@@ -86,65 +86,128 @@ class Graph {
   /** find the distance of the shortest path from the start vertex to the end vertex */
   distanceOfShortestPath(start, end) {
     const nodeToVisitQueue = [start];
+    let adjacentQueue = new Set([start]);
     const seen = [];
-    const stepsTaken = [];
     let pathLength = 0;
 
-    // 2nd loop = queue = [T, R, M]
-      // seen = [H]
-    // 3rd loop
-      // queue = [R, M, I]
-      // seen = [H, T]
-    // 4th loop
-      // queue =
-    
-    
-    // if R adjacents don't include end, add to seen, add each adjacent
+
+
+    while (nodeToVisitQueue.length){
+      let node = nodeToVisitQueue.shift();
+
+      if (node === end) return pathLength;
+      // if R adjacents don't include end, add r to seen, add each adjacent to queue
+      if (node.adjacent.has(end)){
+        pathLength++;
+        return pathLength;
+      }
+
+      // iterate through each adjacent
+      for (let adjNode of node.adjacent){
+        if (!seen.includes(adjNode) && !nodeToVisitQueue.includes(adjNode)){
+          nodeToVisitQueue.push(adjNode);
+        }
+      }
+
+      // add node to seen
+      seen.push(node);
+      // check if node in adjacent queue, remove
+      if (adjacentQueue.has(node)) adjacentQueue.delete(node);
+
+      // if adjacent queue empty
+        // increment pathlength
+        // set adjacent queue to be copy of nodeToVisitQueue
+      if (adjacentQueue.size === 0){
+        pathLength++;
+        adjacentQueue = new Set([...nodeToVisitQueue]);
+      }
+
     // to queue, increase path length by one.
       // seen = [r], [I, T, H], pathLength = 1;
         // seen = [R, I], [T, H], pathLength = 1;
           // [R, I, T], [H], pathLength = 1;
             // increment pathlength by 1, return pathLength;
-    
-    
+
+
     // 1st loop: Adjacents don't include, queue = [h], seen = [m], pathLength = 1,
-      // 2nd Loop, adjacents don't include, queue = [T, R], seen = [m, h], pathLength = 2, 
+      // 2nd Loop, adjacents don't include, queue = [T, R], seen = [m, h], pathLength = 2,
         // 3rd loop, IT DOES, increment, return, 3
-    
-    while (nodeToVisitQueue.length) {
-      let node = nodeToVisitQueue.shift();
-      console.log('The queue is =', nodeToVisitQueue)
-      console.log('The node is =', node)
-      console.log('seen array = ', seen)
-      if (!seen.includes(node)) {
-        if (node === end) {
-          stepsTaken.push(pathLength);
-          pathLength = 0;
-        } else {
-          for (let adjNode of node.adjacent) {
-            if (!seen.includes(adjNode) && !nodeToVisitQueue.includes(adjNode)) {
-              nodeToVisitQueue.push(adjNode);
-            }
-          }
-          seen.push(node);
-          let seenStatus = [];
-          for (let adjNode of node.adjacent) {
-            if (seen.includes(adjNode)) {
-              seenStatus.push(true);
-            } else {
-              seenStatus.push(false);
-            }
-          }
-          console.log(seenStatus, node, 'SeenStatus and node')
-          if (!seenStatus.includes(false)){
-            pathLength += 1;
-          }
-          seenStatus = [];
-        }
+
+
       }
-    }
-    console.log(stepsTaken, 'the number of stepsTaken')
   }
 }
 
 module.exports = { Graph, Node };
+
+// const nodeToVisitQueue = [start];
+// const seen = [];
+// let pathLength = 0;
+
+// while (nodeToVisitQueue.length){
+//   let node = nodeToVisitQueue.shift();
+//   if (node === end) return pathLength;
+//   // if R adjacents don't include end, add r to seen, add each adjacent to queue
+//   if (node.adjacent.has(end)){
+//     pathLength++;
+//     return pathLength
+//   }
+  // iterate through each adjacent
+    // if adj node is not in seen and not in queue, add to queue
+
+  // if none of neighbors in queue or in seen, increase pathLength
+
+// to queue, increase path length by one.
+  // seen = [r], [I, T, H], pathLength = 1;
+    // seen = [R, I], [T, H], pathLength = 1;
+      // [R, I, T], [H], pathLength = 1;
+        // increment pathlength by 1, return pathLength;
+
+
+// 1st loop: Adjacents don't include, queue = [h], seen = [m], pathLength = 1,
+  // 2nd Loop, adjacents don't include, queue = [T, R], seen = [m, h], pathLength = 2,
+    // 3rd loop, IT DOES, increment, return, 3
+
+
+  // }
+
+// -------------------------------------------
+
+// const nodeToVisitQueue = [start];
+// const seen = [];
+// const stepsTaken = [];
+// let pathLength = 0;
+
+      // while (nodeToVisitQueue.length) {
+      //   let node = nodeToVisitQueue.shift();
+      //   console.log('The queue is =', nodeToVisitQueue)
+      //   console.log('The node is =', node)
+      //   console.log('seen array = ', seen)
+      //   if (!seen.includes(node)) {
+      //     if (node === end) {
+      //       stepsTaken.push(pathLength);
+      //       pathLength = 0;
+      //     } else {
+      //       for (let adjNode of node.adjacent) {
+      //         if (!seen.includes(adjNode) && !nodeToVisitQueue.includes(adjNode)) {
+      //           nodeToVisitQueue.push(adjNode);
+      //         }
+      //       }
+      //       seen.push(node);
+      //       let seenStatus = [];
+      //       for (let adjNode of node.adjacent) {
+      //         if (seen.includes(adjNode)) {
+      //           seenStatus.push(true);
+      //         } else {
+      //           seenStatus.push(false);
+      //         }
+      //       }
+      //       console.log(seenStatus, node, 'SeenStatus and node')
+      //       if (!seenStatus.includes(false)){
+      //         pathLength += 1;
+      //       }
+      //       seenStatus = [];
+      //     }
+      //   }
+      // }
+      // console.log(stepsTaken, 'the number of stepsTaken')

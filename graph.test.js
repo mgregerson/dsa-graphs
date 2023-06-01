@@ -282,9 +282,9 @@ describe("distanceOfShortestPath", function () {
     //            R
     //         /  |  \
     //        I - T - H
-    //                |
-    //                M
-    //            
+    //               |
+    //               M
+    //
 
     let graph = new Graph();
 
@@ -304,8 +304,8 @@ describe("distanceOfShortestPath", function () {
     graph.addEdge(h, m);
 
     expect(graph.distanceOfShortestPath(r, m)).toBe(2);
-    // expect(graph.distanceOfShortestPath(t, r)).toBe(1);
-    // expect(graph.distanceOfShortestPath(t, m)).toBe(2);
-    // expect(graph.distanceOfShortestPath(t, "rogue node")).toBe(undefined);
+    expect(graph.distanceOfShortestPath(t, r)).toBe(1);
+    expect(graph.distanceOfShortestPath(t, m)).toBe(2);
+    expect(graph.distanceOfShortestPath(t, "rogue node")).toBe(undefined);
   });
 });
